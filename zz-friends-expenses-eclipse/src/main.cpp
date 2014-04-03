@@ -1,5 +1,5 @@
 //============================================================================
-x// Name        : main.cpp
+// Name        : main.cpp
 // Author      : aabou
 // Version     :
 // Copyright   : Your copyright notice
@@ -10,7 +10,6 @@ x// Name        : main.cpp
 #include "Group.hpp"
 #include "CountWord.hpp"
 #include "Csv.hpp"
-
 
 #include <iostream>
 #include <fstream>
@@ -26,6 +25,5 @@ using namespace std;
 int main(int argc, char **argv) {
 	Csv *fileCsv = new Csv("src/fichier.csv");
 	fileCsv->getObjects();
-
     return 0;
 }
