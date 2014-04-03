@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : main.cpp
-// Author      : aabou
+// Author      : yannick kuhn
 // Version     :
 // Copyright   : Your copyright notice
 // Description : Tutorial - Application to manage friends expenses
