@@ -13,10 +13,10 @@ using namespace std;
 
 typedef enum
 {
-	UNKNOWN=0,
-	HELP=1,
-	FILENAME=2,
-	NOTHING=3
+	unknown=0,
+	help=1,
+	filename=2,
+	nothing=3
 
 }ARG;
 Arguments::Arguments(int iargc, char **iargv)
@@ -25,20 +25,34 @@ Arguments::Arguments(int iargc, char **iargv)
 	_argv = iargv;
 
 }
-void Arguments::AfficherArguments()
+vector<string> Arguments::AfficherArguments()
 {
 	int i;
-	  cout << "Nom de programme " << _argv[0] << endl;
-	  cout << "Nombre d'arguments : %d\n"<< _argc - 1 << endl;
+	vector<string> myarguments;
+	/*  cout << "Nom de programme " << _argv[0] << endl;
+	  cout << "Nombre d'arguments : %d\n"<< _argc - 1 << endl;*/
 	  for(i=1;i<_argc;++i)
 	  {
-
+		  string toto =  _argv[i];
+		  myarguments.push_back(toto);
 	  }
-    	  cout << "Argument" << i << " ==> " <<_argv[i]<< endl;
+	  _arguments = myarguments;
+     return myarguments;  //cout << "Argument" << i << " ==> " <<_argv[i]<< endl;
 }
-void Arguments::SwitchArguments()
+string Arguments::SwitchArguments(vector<string> iArguments)
 {
-
+	for(int i=0;i<iArguments.size();i++)
+	{
+		if(iArguments.at(i).compare("--help")==0)
+		{
+			cout << "--help                display me"<< endl;
+			cout << "--file filename       read the file to render the result"<< endl;
+		}
+		if(iArguments.at(i).compare("--file")==0)
+		{
+			return iArguments.at(i+1);
+		}
+	}
 }
 
 

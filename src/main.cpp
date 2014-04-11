@@ -31,9 +31,10 @@ int main(int argc, char **argv)
 	Arguments *arg = new Arguments(argc,argv);
 	arg->AfficherArguments();
 
-
-	Csv *fileCsv = new Csv("../src/fichier.csv");
-	//fileCsv->getObjects();
+	string csvemplacement=arg->SwitchArguments(arg->AfficherArguments());
+	Csv *fileCsv = new Csv(csvemplacement);
+	//Csv *fileCsv = new Csv("../src/fichier.csv");
+	fileCsv->getObjects();
 
     return 1;
 }
