@@ -20,11 +20,15 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+
 using namespace std;
 
-int main(int argc, char **argv) {
-	Csv *fileCsv = new Csv("src/fichier.csv");
+#include <gtest/gtest.h>
 
+int main(int argc, char **argv) {
+
+
+	Csv *fileCsv = new Csv("src/fichier.csv");
 	fileCsv->getObjects();
     return 0;
 }
