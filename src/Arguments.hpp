@@ -21,8 +21,10 @@ public:
 	Arguments(int iargc, char **iargv);
 	vector<string> AfficherArguments();
 	string SwitchArguments(vector<string> iArguments);
+	void AfficherHelp();
 private:
 	int _argc;
+	int _argument;
 	char **_argv;
 	vector<string> _arguments;
 };
