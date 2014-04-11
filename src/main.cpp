@@ -10,6 +10,7 @@
 #include "Group.hpp"
 #include "CountWord.hpp"
 #include "Csv.hpp"
+#include "Arguments.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -24,9 +25,15 @@
 using namespace std;
 
 
-int main(int argc, char **argv) {
-	Csv *fileCsv = new Csv("src/fichier.csv");
-	fileCsv->getObjects();
+int main(int argc, char **argv)
+{
+
+	Arguments *arg = new Arguments(argc,argv);
+	arg->AfficherArguments();
+
+
+	Csv *fileCsv = new Csv("../src/fichier.csv");
+	//fileCsv->getObjects();
 
     return 1;
 }

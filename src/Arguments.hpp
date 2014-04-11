@@ -7,13 +7,21 @@
 
 #ifndef ARGUMENTS_HPP_
 #define ARGUMENTS_HPP_
-
+#include <iostream>
+#include <string>
+#include <unistd.h>
+#include <stdlib.h>
 using namespace std;
+
+
 
 class Arguments {
 public:
-	Arguments(int argc, char **argv);
+	Arguments(int iargc, char **iargv);
+	void AfficherArguments();
 private:
+	int _argc;
+	char **_argv;
 };
 
 
