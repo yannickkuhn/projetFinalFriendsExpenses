@@ -25,8 +25,6 @@ using namespace std;
 
 
 int main(int argc, char **argv) {
-
-
 	Csv *fileCsv = new Csv("src/fichier.csv");
 	fileCsv->getObjects();
     return 0;
