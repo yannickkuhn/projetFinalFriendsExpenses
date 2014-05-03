@@ -8,11 +8,25 @@
 #include "Donor.hpp"
 
 Donor::Donor() {
-	// TODO Auto-generated constructor stub
+	_expenses = 0;
+	_payback = 0;
+}
 
+Donor::Donor(const Group *iGroup) {
+	_expenses = 0;
+	_payback = 0;
+	_group = iGroup;
 }
 
 Donor::~Donor() {
-	// TODO Auto-generated destructor stub
+
+}
+
+void Donor::setExpenses(const float expenses) {		// Positive expenses become negative expenses (Donor)
+	_expenses = -expenses;
+}
+
+void Donor::operatePayback(const float iExpensesPerPerson, const int iIfPresenceDonor) {
+	_payback = 0;
 }
 

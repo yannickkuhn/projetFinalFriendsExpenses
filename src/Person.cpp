@@ -25,8 +25,11 @@ Person::~Person() {
 
 }
 
-void Person::operatePayback(const float iExpensesPerPerson) {
-    _payback = _expenses - iExpensesPerPerson;
+void Person::operatePayback(const float iExpensesPerPerson, const int iIfPresenceDonor) {
+	if(iIfPresenceDonor)
+		_payback = iExpensesPerPerson;
+	else
+		_payback = _expenses - iExpensesPerPerson;
 }
 
 // getters of Person
@@ -36,6 +39,9 @@ const string& Person::getName() const {
 }
 const string& Person::getPhoneNumber() const {
 	return _phoneNumber;
+}
+const string& Person::getType() const {
+	return _type;
 }
 const float Person::getExpenses() const {
 	return _expenses;
@@ -54,6 +60,9 @@ void Person::setName(const string& name) {
 }
 void Person::setPhoneNumber(const string& phoneNumber) {
 	_phoneNumber = phoneNumber;
+}
+void Person::setType(const string& type) {
+	_type = type;
 }
 void Person::setExpenses(const float expenses) {
 	_expenses = expenses;

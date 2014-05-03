@@ -10,31 +10,39 @@
 
 #include <vector>
 #include <string>
+#include <typeinfo>
+#include <iostream>
 #include "Person.hpp"
 
 
-class Group : public vector<Person> {
+class Group : public vector<Person *> {
 
 public:
     Group();
     virtual ~Group();
 
-    float totalExpenses();
-    float expensesPerPerson();
+    void totalExpenses();
+    void calculExpensesPerPerson();
+    void calculNbOfExpensesPerson();
+
+    int ifOfNotPresenceDonor();
 
 // getters of Group
     const float getExpensePerPerson() const;
     const float getTotalExpenses() const;
     const string& getName() const;
+    const int getNbPerson() const;
 
 // setters of Group
     void setExpensePerPerson(const float expensePerPerson);
     void setTotalExpenses(const float totalExpenses);
     void setName(const string& name);
+    void setNbPerson(const int nbPerson);
 
 private:
 	float _expensePerPerson;
 	float _totalExpenses;
+	int _nbPerson;
 	string _name;
 };
 

@@ -59,13 +59,30 @@ void Csv::getObjects() {
 			/* si la personne correspond au nom du groupe (dans l'ordre) */
 
 			if(aFields.at(3) == aGroup.getName()) {
-				//cout << "  (debug) >> Person : " << aFields.at(0) << " " << aFields.at(1) << " " << aFields.at(2) << " " << aFields.at(3) << endl;
-				Person aPerson(&aGroup);
-				aPerson.setName(aFields.at(0));
-				aPerson.setPhoneNumber(aFields.at(1));
-				aPerson.setExpenses((float)atof(aFields.at(2).c_str()));
+
+				Person *aPerson;
+
+				if(aFields.at(4) == "Person") {
+					aPerson = new Person(&aGroup);
+				}
+				else if(aFields.at(4) == "Donor") {
+					aPerson = new Donor(&aGroup);
+				}
+				else {
+					cerr << "error - read CSV file - problem with type of Person" << endl;
+				}
+
+				aPerson->setName(aFields.at(0));
+				aPerson->setPhoneNumber(aFields.at(1));
+				aPerson->setExpenses((float)atof(aFields.at(2).c_str()));
+				aPerson->setType(aFields.at(4));
+
+				const type_info &aT1 = typeid(*aPerson);
+				string aST1(aT1.name());
+				cout << "  (debug) >> Donor or Person : " << aFields.at(0) << " " << aFields.at(1) << " " << aPerson->getExpenses() << " " << aFields.at(3) << " " << aPerson->getType() << endl;
 
 				aGroup.push_back(aPerson);
+
 			}
 		}
 
@@ -75,26 +92,31 @@ void Csv::getObjects() {
 	/* affichage */
 
 	for (vector<Group>::iterator it = _groups.begin() ; it != _groups.end(); ++it) {
+
+		it->calculExpensesPerPerson();
+
 		cout << endl;
 		cout << "Group " << it->getName() << endl;
-		cout << "Total expenses:\t\t" << it->totalExpenses() << endl;
-		cout << "Expenses per person:\t" << it->expensesPerPerson() << endl;
+		cout << "Total expenses:\t\t" << it->getTotalExpenses() << endl;
+		cout << "Expenses per person:\t" << it->getExpensePerPerson() << endl;
 		cout << endl;
 
 		cout << "Name\t\t" << "Phone Number\t" << "Expenses\t"
-		<< "Payback\t\t" << "Group" << endl;
-		cout << "--------------------------------------------------------------------------"
+		<< "Payback\t\t" << "Type\t\t" << "Group" << endl;
+		cout << "------------------------------------------------------------------------------------"
 		<< endl;
 
 		Group aGroup = *it;
 
 		for (size_t i=0; i < aGroup.size(); ++i) {
 			// operate the payback first
-			aGroup[i].operatePayback(aGroup.expensesPerPerson());
+			aGroup.calculExpensesPerPerson();
+			aGroup[i]->operatePayback(aGroup.getExpensePerPerson(),aGroup.ifOfNotPresenceDonor());
 			// display the values
-			cout << aGroup[i].getName() << "\t\t" << aGroup[i].getPhoneNumber()
-			<< "\t\t" << aGroup[i].getExpenses() << "\t\t"
-			<< aGroup[i].getPayback() << "\t\t" << aGroup[i].getGroup()->getName() << endl;
+			cout << aGroup[i]->getName() << "\t\t" << aGroup[i]->getPhoneNumber()
+			<< "\t\t" << round(aGroup[i]->getExpenses()) << "\t\t"
+			<< round(aGroup[i]->getPayback()) << "\t\t"
+			<< aGroup[i]->getType() << "\t\t" << aGroup[i]->getGroup()->getName() << endl;
 		}
 		cout << endl;
 	}
@@ -104,5 +126,10 @@ void Csv::getObjects() {
 
 Csv::~Csv() {
 
+}
+
+float Csv::round(float data) {
+	float nearest = floorf(data * 100 + 0.5) / 100;
+	return nearest;
 }
 

@@ -19,11 +19,12 @@ public:
     Person();
     Person(const Group *iGroup);
     virtual ~Person();
-    void operatePayback(const float iExpensesPerPerson);
+    virtual void operatePayback(const float iExpensesPerPerson, const int iIfPresenceDonor);
 
 // getters of Person
     const string& getName() const;
     const string& getPhoneNumber() const;
+    const string& getType() const;
     const float getExpenses() const;
     const float getPayback() const;
     const Group* getGroup() const;
@@ -31,14 +32,16 @@ public:
 // setters of Person
     void setName(const string& name);
     void setPhoneNumber(const string& phoneNumber);
-    void setExpenses(const float expenses);
+    void setType(const string& type);
+    virtual void setExpenses(const float expenses);
     void setPayback(const float payback);
 
-private:
-    string _name;
-    string _phoneNumber;
+protected:
     float _expenses;
     float _payback;
+    string _name;
+    string _phoneNumber;
+    string _type;
     const Group *_group;
 };
 

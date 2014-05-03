@@ -9,6 +9,7 @@
 #define CSV_HPP_
 
 #include "Person.hpp"
+#include "Donor.hpp"
 #include "Group.hpp"
 #include "CountWord.hpp"
 
@@ -20,6 +21,8 @@
 #include <list>
 #include <unistd.h>
 #include <stdlib.h>
+#include <typeinfo>
+#include <math.h>
 
 using namespace std;
 
@@ -27,6 +30,7 @@ class Csv {
 public:
 	Csv(string iFile);
 	void getObjects();
+	float round(float data);
 	virtual ~Csv();
 private:
 	string _file;
