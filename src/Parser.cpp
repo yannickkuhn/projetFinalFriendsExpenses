@@ -6,12 +6,10 @@
  */
 
 #include "Parser.hpp"
-
+#include <string.h>
 Parser::Parser(int argc, char **argv) :
 		_argc(argc), _argv(argv) {
-	if(argc > 1){
-		cout << argv[argc];
-	}
+
 }
 
 Parser::~Parser() {
@@ -35,28 +33,15 @@ void Parser::setArgc(int argc) {
 }
 
 void Parser::parse() {
-
-	if (_argc == 0) {
+	// If no custom argument.
+	if (_argc == 1) {
 		displayLongHelp();
 	} else {
-		while (_argc <= 6) {
-			cout << "Unknown command.\n";
+		// Contains either "help" or "file".
+		if(strcmp(_argv[1],"help") == 0){
 			displayLongHelp();
-			readcsvfile();
-			//std::string arg1 = _argv[1];
-			//if (arg1 == "--help") {
-			//					   displayLongHelp();
-			//					   }else{
-			//							   std::cout<<"Unknown command.\n";}
-			//}
-
-			//if(arg == "--file")
-			//{
-			//readcsvfile();
-			//std::cout<<"file.\n";
-			//	}else{
-			//				 std::cout<<"Unknown command.\n";}
-			//}
+		}else{
+			cout << "file" <<endl;
 		}
 	}
 }

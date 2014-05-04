@@ -24,7 +24,7 @@ int main(int argc,char **argv)
 {
 	Parser *parse;
 	parse = new Parser(argc, argv);
-	//parse->parse();
+	parse->parse();
 
 	//Csv *fileCsv = new Csv("src/fichier.csv");
 	//fileCsv->getObjects();
