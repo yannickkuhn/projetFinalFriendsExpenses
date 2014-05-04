@@ -7,6 +7,7 @@
 
 #include "Parser.hpp"
 #include <string.h>
+
 Parser::Parser(int argc, char **argv) :
 		_argc(argc), _argv(argv) {
 
@@ -38,10 +39,12 @@ void Parser::parse() {
 		displayLongHelp();
 	} else {
 		// Contains either "help" or "file".
-		if(strcmp(_argv[1],"help") == 0){
+		if (strcmp(_argv[1], Parser::ArgHelp) == 0) {
 			displayLongHelp();
-		}else{
-			cout << "file" <<endl;
+		} else if (strcmp(_argv[1], Parser::ArgFile) == 0) {
+			readCsvFile();
+		} else {
+			displayLongHelp();
 		}
 	}
 }
@@ -52,16 +55,13 @@ void Parser::displayLongHelp() {
 			"--file filename read the file to render the results.\n";
 }
 
-void Parser::readcsvfile() {
-	cout << "readcsvfile\n";
+void Parser::readCsvFile() {
+	if (strcmp(_argv[2], Parser::ArgNameCsv) == 0) {
+		cout<<"Affichage du fichier CSV"<<endl;
 
-	/*if (_argc!=6 and _argv)
-	 {
-	 std::cout << "Invalid arguments..." << endl;
-	 return 1;
-	 }
-	 {
-	 cout<<"Error::no file mentioned"<<endl;
-	 }*/
+	}else{
+		 cout<<"Error:no file mentioned"<<endl;
+	}
+
 }
 

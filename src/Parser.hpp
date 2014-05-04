@@ -30,8 +30,10 @@ public:
 
 	void parse();
 	void displayLongHelp();
-	void readcsvfile();
-
+	void readCsvFile();
+	const char* ArgHelp= "help";
+	const char* ArgFile="file";
+	const char* ArgNameCsv="fichier.csv";
 private:
 		int _argc;
 		char **_argv;
