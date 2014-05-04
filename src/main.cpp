@@ -10,10 +10,8 @@
 #include "Group.hpp"
 #include "CountWord.hpp"
 #include "Csv.hpp"
-
+#include "Parser.hpp"
 #include <iostream>
-#include <fstream>
-#include <sstream>
 #include <vector>
 #include <string>
 #include <list>
@@ -22,9 +20,14 @@
 
 using namespace std;
 
-int main(int argc, char **argv) {
-	Csv *fileCsv = new Csv("src/fichier.csv");
+int main(int argc,char **argv)
+{
+	Parser *parse;
+	parse = new Parser(argc, argv);
+	//parse->parse();
 
-	fileCsv->getObjects();
+	//Csv *fileCsv = new Csv("src/fichier.csv");
+	//fileCsv->getObjects();
+
     return 0;
 }
