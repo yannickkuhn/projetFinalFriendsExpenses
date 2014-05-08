@@ -5,14 +5,14 @@
  *      Author: ubuntu
  */
 
-#include "CountWord.hpp"
+#include "LineReader.hpp"
 
 
-CountWord::CountWord(string iText) {
+LineReader::LineReader(string iText) {
 	_text = iText;
 }
 
-unsigned int CountWord::count() {
+unsigned int LineReader::count() {
     unsigned int aCount = 0;
     char *aWord = 0;
     char aDelimiters[] = " :.!\"#$%&'()*+,-/;<=>?@[]\\^_`{|}~\n\t\r";
@@ -30,7 +30,7 @@ unsigned int CountWord::count() {
     return aCount;
 }
 
-vector<string> CountWord::split() {
+vector<string> LineReader::split() {
     vector<string> aWords;
     char *aWord = 0;
     char aDelimiters[] = " :.!\"#$%&'()*+,-/;<=>?@[]\\^_`{|}~\n\t\r";

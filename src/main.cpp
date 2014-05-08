@@ -8,7 +8,7 @@
 
 #include "Person.hpp"
 #include "Group.hpp"
-#include "CountWord.hpp"
+#include "LineReader.hpp"
 #include "CsvReader.hpp"
 
 #include <iostream>

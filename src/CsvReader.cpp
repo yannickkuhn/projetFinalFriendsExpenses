@@ -35,7 +35,7 @@ void CsvReader::getObjects() {
 
 	for(unsigned int i=1; i<aFileLines.size(); i++) {
 		vector<string> aFields;
-		CountWord aCWord(aFileLines.at(i).data());
+		LineReader aCWord(aFileLines.at(i).data());
 		aFields = aCWord.split();
 		aStrGroups.push_back(aFields.at(3));
 	}
@@ -53,7 +53,7 @@ void CsvReader::getObjects() {
 
 		for(unsigned int i=1; i<aFileLines.size(); i++) {
 			vector<string> aFields;
-			CountWord aCWord(aFileLines.at(i).data());
+			LineReader aCWord(aFileLines.at(i).data());
 			aFields = aCWord.split();
 
 			/* si la personne correspond au nom du groupe (dans l'ordre) */

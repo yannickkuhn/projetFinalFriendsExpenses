@@ -11,7 +11,7 @@
 #include "Person.hpp"
 #include "Donor.hpp"
 #include "Group.hpp"
-#include "CountWord.hpp"
+#include "LineReader.hpp"
 
 #include <iostream>
 #include <fstream>

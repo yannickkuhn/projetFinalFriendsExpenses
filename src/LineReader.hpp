@@ -14,11 +14,11 @@
 
 using namespace std;
 
-class CountWord {
+class LineReader {
 
 public:
-	CountWord();
-	CountWord(string iText);
+	LineReader();
+	LineReader(string iText);
     unsigned int count();
     vector<string> split();
 
