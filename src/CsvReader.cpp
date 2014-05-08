@@ -124,23 +124,28 @@ void CsvReader::getObjects() {
 
 		cout << fixed << showpoint << setprecision(2);
 		cout << endl;
-		cout << "Group " << aTmpGroup->getName() << endl;
-		cout << "Total expenses:\t\t" << aTmpGroup->getTotalExpenses() << endl;
-		cout << "Expenses per person:\t" << aTmpGroup->getExpensePerPerson() << endl;
+		cout << color(34) << "Group " << aTmpGroup->getName() << endl << "--------------------------------------------------------------------------"  << color(37) << endl;
+		printColorValues("Total expenses:\t\t",aTmpGroup->getTotalExpenses());
+		cout << endl;
+		printColorValues("Expenses per person:\t",aTmpGroup->getExpensePerPerson());
+		cout << endl;
 		cout << endl;
 
-		cout << "Name\t\t" << "Phone Number\t" << "Expenses\t"
+		cout << color(34) << "Name\t\t" << "Phone Number\t" << "Expenses\t"
 		<< "Payback\t\t" << "Group" << endl;
 		cout << "--------------------------------------------------------------------------"
-		<< endl;
+		<< color(37) << endl;
 
 		for (size_t j=0; j<aTmpGroup->size(); ++j) {
 			// operate the payback first
 			aTmpGroup->at(j)->operatePayback(aTmpGroup->getExpensePerPerson(),aTmpGroup->ifOfNotPresenceDonor());
 			// display the values
 			cout << aTmpGroup->at(j)->getName() << "\t\t" << aTmpGroup->at(j)->getPhoneNumber()
-			<< "\t\t" << aTmpGroup->at(j)->getExpenses() << "\t\t"
-			<< aTmpGroup->at(j)->getPayback() << "\t\t" << aTmpGroup->at(j)->getGroup()->getName() << endl;
+			<< "\t\t";
+			printColorValues("",aTmpGroup->at(j)->getExpenses());
+			cout << "\t\t";
+			printColorValues("",aTmpGroup->at(j)->getPayback());
+			cout << "\t\t" << aTmpGroup->at(j)->getGroup()->getName() << endl;
 		}
 
 	}
@@ -151,8 +156,15 @@ CsvReader::~CsvReader() {
 
 }
 
-float CsvReader::round(float data) {
-	float nearest = floorf(data * 100 + 0.5) / 100;
+float CsvReader::round(float iData) {
+	float nearest = floorf(iData * 100 + 0.5) / 100;
 	return nearest;
 }
 
+void CsvReader::printColorValues(string iText, float iValue) {
+	cout << iText;
+	if(iValue <= 0)
+		cout << color(30) << iValue << color(37);
+	else
+		cout << color(31) << iValue << color(37);
+}

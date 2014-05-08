@@ -25,6 +25,10 @@
 #include <iomanip>
 #include <math.h>
 
+#define color(param) "\033[" << param << "m"
+/*30, 31, 32, 33, 34, 35, 36, 37 couleur des caractères
+  noir, rouge, vert, jaune, bleu, magenta, cyan et blanc */
+
 using namespace std;
 
 class CsvReader {
@@ -33,7 +37,8 @@ public:
 	void getObjects();
 	int testLineContent(string iLineContent);
 	int testGroupInMemory(string iName);
-	float round(float data);
+	void printColorValues(string iText, float iValue);
+	float round(float iData);
 	virtual ~CsvReader();
 private:
 	string _file;
