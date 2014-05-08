@@ -2,7 +2,7 @@
  * Person.cpp
  *
  *  Created on: Feb 18, 2014
- *      Author: aabou
+ *      Author: Yannick
  */
 
 #include "Group.hpp"

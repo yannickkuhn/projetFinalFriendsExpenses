@@ -2,7 +2,7 @@
  * Donor.hpp
  *
  *  Created on: 11 avr. 2014
- *      Author: ubuntu
+ *      Author: Yannick
  */
 
 #ifndef DONOR_HPP_

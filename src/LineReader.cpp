@@ -1,8 +1,8 @@
 /*
- * CountWord.cpp
+ * LineReader.cpp
  *
  *  Created on: 20 mars 2014
- *      Author: ubuntu
+ *      Author: Yannick
  */
 
 #include "LineReader.hpp"

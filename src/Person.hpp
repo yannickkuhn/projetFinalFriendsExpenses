@@ -2,7 +2,7 @@
  * Person.hpp
  *
  *  Created on: Feb 18, 2014
- *      Author: aabou
+ *      Author: Yannick
  */
 
 #ifndef PERSON_HPP_

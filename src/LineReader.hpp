@@ -1,8 +1,8 @@
 /*
- * CountWord.hpp
+ * LineReader.hpp
  *
  *  Created on: 20 mars 2014
- *      Author: ubuntu
+ *      Author: Yannick
  */
 
 #ifndef COUNTWORD_HPP_

@@ -2,7 +2,7 @@
  * Donor.cpp
  *
  *  Created on: 11 avr. 2014
- *      Author: ubuntu
+ *      Author: Yannick
  */
 
 #include "Donor.hpp"
