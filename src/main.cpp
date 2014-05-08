@@ -19,12 +19,15 @@
 #include <list>
 #include <unistd.h>
 #include <stdlib.h>
+#include "Parser.hpp"
 
 using namespace std;
 
 int main(int argc, char **argv) {
-	CsvReader *fileCsv = new CsvReader("src/fichier.csv");
 
-	fileCsv->getObjects();
+	Parser *parse;
+	parse = new Parser(argc, argv);
+	parse->parse();
+
     return 0;
 }

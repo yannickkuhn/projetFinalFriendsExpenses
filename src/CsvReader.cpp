@@ -9,9 +9,11 @@
 
 CsvReader::CsvReader(string iFile) {
 	_file = iFile;
+	cout << "recuperer le fichier : " << _file << endl;
 	_df = new ifstream(_file.data(), ios::in);
 	if ( !_df )
 		cout << "fichier inexistant";
+	cout << "lecture du fichier ok" << endl;
 }
 
 int CsvReader::testGroupInMemory(string iName) {
