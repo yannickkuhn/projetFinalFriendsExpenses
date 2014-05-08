@@ -23,7 +23,7 @@
 #include <stdlib.h>
 #include <typeinfo>
 #include <iomanip>
-#include <math.h>
+#include <cmath>
 
 #define color(param) "\033[" << param << "m"
 /*30, 31, 32, 33, 34, 35, 36, 37 couleur des caractères

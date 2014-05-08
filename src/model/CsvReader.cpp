@@ -157,7 +157,7 @@ CsvReader::~CsvReader() {
 }
 
 float CsvReader::round(float iData) {
-	float nearest = floorf(iData * 100 + 0.5) / 100;
+	float nearest = floor(iData * 100 + 0.5) / 100;
 	return nearest;
 }
 
