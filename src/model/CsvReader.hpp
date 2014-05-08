@@ -8,10 +8,10 @@
 #ifndef CSV_HPP_
 #define CSV_HPP_
 
-#include "Person.hpp"
-#include "Donor.hpp"
-#include "Group.hpp"
-#include "LineReader.hpp"
+#include "../model/Person.hpp"
+#include "../model/Donor.hpp"
+#include "../model/Group.hpp"
+#include "../controller/LineReader.hpp"
 
 #include <iostream>
 #include <fstream>

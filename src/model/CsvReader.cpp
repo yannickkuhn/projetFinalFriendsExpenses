@@ -124,7 +124,7 @@ void CsvReader::getObjects() {
 
 		cout << fixed << showpoint << setprecision(2);
 		cout << endl;
-		cout << color(34) << "Group " << aTmpGroup->getName() << endl << "--------------------------------------------------------------------------"  << color(37) << endl;
+		cout << color(34) << "Group " << aTmpGroup->getName() << endl << "---------------------------"  << color(37) << endl;
 		printColorValues("Total expenses:\t\t",aTmpGroup->getTotalExpenses());
 		cout << endl;
 		printColorValues("Expenses per person:\t",aTmpGroup->getExpensePerPerson());
@@ -132,8 +132,8 @@ void CsvReader::getObjects() {
 		cout << endl;
 
 		cout << color(34) << "Name\t\t" << "Phone Number\t" << "Expenses\t"
-		<< "Payback\t\t" << "Group" << endl;
-		cout << "--------------------------------------------------------------------------"
+		<< "Payback\t\t" << "Group\t\t" << "Type" << endl;
+		cout << "--------------------------------------------------------------------------------------"
 		<< color(37) << endl;
 
 		for (size_t j=0; j<aTmpGroup->size(); ++j) {
@@ -145,7 +145,7 @@ void CsvReader::getObjects() {
 			printColorValues("",aTmpGroup->at(j)->getExpenses());
 			cout << "\t\t";
 			printColorValues("",aTmpGroup->at(j)->getPayback());
-			cout << "\t\t" << aTmpGroup->at(j)->getGroup()->getName() << endl;
+			cout << "\t\t" << aTmpGroup->at(j)->getGroup()->getName() << "\t\t" << aTmpGroup->at(j)->getType() << endl;
 		}
 
 	}

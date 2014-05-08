@@ -6,10 +6,10 @@
 // Description : Tutorial - Application to manage friends expenses
 //============================================================================
 
-#include "Person.hpp"
-#include "Group.hpp"
-#include "LineReader.hpp"
-#include "CsvReader.hpp"
+#include "../model/Person.hpp"
+#include "../model/Group.hpp"
+#include "../controller/LineReader.hpp"
+#include "../model/CsvReader.hpp"
 
 #include <iostream>
 #include <fstream>

@@ -16,7 +16,7 @@ using namespace std;
 #include <list>
 #include <unistd.h>
 #include <stdlib.h>
-#include "CsvReader.hpp"
+#include "../model/CsvReader.hpp"
 
 // pour pouvoir récupérer ce qu'il y a sur la console on passe : int argc, char **argv
 
