@@ -19,7 +19,7 @@
 #include <list>
 #include <unistd.h>
 #include <stdlib.h>
-#include "controller/Parser.hpp"
+#include "view/Parser.hpp"
 
 using namespace std;
 
