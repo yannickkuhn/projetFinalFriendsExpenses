@@ -19,8 +19,8 @@ class LineReader {
 public:
 	LineReader();
 	LineReader(string iText);
-    unsigned int count();
-    vector<string> split();
+    unsigned int wordCount();
+    vector<string> splitWord(char *iDelimiter);
 
 private:
     string _text;

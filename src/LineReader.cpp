@@ -12,7 +12,7 @@ LineReader::LineReader(string iText) {
 	_text = iText;
 }
 
-unsigned int LineReader::count() {
+unsigned int LineReader::wordCount() {
     unsigned int aCount = 0;
     char *aWord = 0;
     char aDelimiters[] = " :.!\"#$%&'()*+,-/;<=>?@[]\\^_`{|}~\n\t\r";
@@ -30,20 +30,20 @@ unsigned int LineReader::count() {
     return aCount;
 }
 
-vector<string> LineReader::split() {
+vector<string> LineReader::splitWord(char *iDelimiter) {
     vector<string> aWords;
     char *aWord = 0;
-    char aDelimiters[] = " :.!\"#$%&'()*+,-/;<=>?@[]\\^_`{|}~\n\t\r";
+    //char aDelimiters[] = " :.!\"#$%&'()*+,-/;<=>?@[]\\^_`{|}~\n\t\r";
     // Cf. http://www.cplusplus.com/reference/cctype/
     // for the list of characters
 
     char aText[_text.length() + 1];
     strcpy(aText, _text.c_str());
 
-    aWord = strtok(aText, aDelimiters);
+    aWord = strtok(aText, iDelimiter);
     while (aWord) {
     	aWords.push_back(aWord);
-        aWord = strtok(0, aDelimiters);
+        aWord = strtok(0, iDelimiter);
     }
     return aWords;
 }

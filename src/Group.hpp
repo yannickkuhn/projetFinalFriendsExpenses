@@ -19,6 +19,7 @@ class Group : public vector<Person *> {
 
 public:
     Group();
+    Group(string aName);
     virtual ~Group();
 
     void totalExpenses();

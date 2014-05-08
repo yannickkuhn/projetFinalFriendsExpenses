@@ -16,6 +16,14 @@ Group::Group() :
 
 }
 
+Group::Group(string aName) :
+	_expensePerPerson(0),
+	_totalExpenses(0),
+	_nbPerson(0),
+	_name(aName) {
+
+}
+
 Group::~Group() {
 
 }

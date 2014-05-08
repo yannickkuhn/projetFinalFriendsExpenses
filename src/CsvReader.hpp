@@ -30,12 +30,14 @@ class CsvReader {
 public:
 	CsvReader(string iFile);
 	void getObjects();
+	int testLineContent(string iLineContent);
+	int testGroupInMemory(string iName);
 	float round(float data);
 	virtual ~CsvReader();
 private:
 	string _file;
 	ifstream *_df;
-	vector<Group> _groups;
+	vector<Group *> _groups;
 };
 
 #endif /* CSV_HPP_ */

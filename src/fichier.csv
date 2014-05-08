@@ -1,5 +1,5 @@
 Name;"Phone Number";Expenses;"Group Name";Type
-Paul;1234;210;Righi;Person
+Paul;1234;210.50;Righi;Person
 Nicolas;5678;50;Righi;Person
 Charles;9012;114;Jasse;Person
 Yanis;3456;200;Righi;Donor
@@ -11,3 +11,4 @@ Salim;9456;213;Colombier;Person
 Laura;9012;188;Jasse;Donor
 Stephan;8073;178;Berlioz;Person
 Ange;5046;10;Jasse;Person
+
