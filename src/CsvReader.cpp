@@ -115,16 +115,16 @@ void CsvReader::getObjects() {
 	cout << "Liste des groupes crées : " << endl;
 	for(size_t i=0; i < _groups.size(); i++) {
 
-		Group *ATmpGroup = _groups.at(i);
+		Group *aTmpGroup = _groups.at(i);
 
-		ATmpGroup->calculExpensesPerPerson();
-		ATmpGroup->calculNbOfExpensesPerson();
+		aTmpGroup->calculExpensesPerPerson();
+		aTmpGroup->calculNbOfExpensesPerson();
 
 		cout << fixed << showpoint << setprecision(2);
 		cout << endl;
-		cout << "Group " << ATmpGroup->getName() << endl;
-		cout << "Total expenses:\t\t" << ATmpGroup->getTotalExpenses() << endl;
-		cout << "Expenses per person:\t" << ATmpGroup->getExpensePerPerson() << endl;
+		cout << "Group " << aTmpGroup->getName() << endl;
+		cout << "Total expenses:\t\t" << aTmpGroup->getTotalExpenses() << endl;
+		cout << "Expenses per person:\t" << aTmpGroup->getExpensePerPerson() << endl;
 		cout << endl;
 
 		cout << "Name\t\t" << "Phone Number\t" << "Expenses\t"
@@ -132,13 +132,13 @@ void CsvReader::getObjects() {
 		cout << "--------------------------------------------------------------------------"
 		<< endl;
 
-		for (size_t j=0; j<ATmpGroup->size(); ++j) {
+		for (size_t j=0; j<aTmpGroup->size(); ++j) {
 			// operate the payback first
-			ATmpGroup->at(j)->operatePayback(ATmpGroup->getExpensePerPerson(),ATmpGroup->ifOfNotPresenceDonor());
+			aTmpGroup->at(j)->operatePayback(aTmpGroup->getExpensePerPerson(),aTmpGroup->ifOfNotPresenceDonor());
 			// display the values
-			cout << ATmpGroup->at(j)->getName() << "\t\t" << ATmpGroup->at(j)->getPhoneNumber()
-			<< "\t\t" << ATmpGroup->at(j)->getExpenses() << "\t\t"
-			<< ATmpGroup->at(j)->getPayback() << "\t\t" << ATmpGroup->at(j)->getGroup()->getName() << endl;
+			cout << aTmpGroup->at(j)->getName() << "\t\t" << aTmpGroup->at(j)->getPhoneNumber()
+			<< "\t\t" << aTmpGroup->at(j)->getExpenses() << "\t\t"
+			<< aTmpGroup->at(j)->getPayback() << "\t\t" << aTmpGroup->at(j)->getGroup()->getName() << endl;
 		}
 
 	}
