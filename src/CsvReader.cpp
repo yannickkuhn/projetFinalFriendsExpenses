@@ -5,16 +5,16 @@
  *      Author: ubuntu
  */
 
-#include "Csv.hpp"
+#include "CsvReader.hpp"
 
-Csv::Csv(string iFile) {
+CsvReader::CsvReader(string iFile) {
 	_file = iFile;
 	_df = new ifstream(_file.data(), ios::in);
 	if ( !_df )
 		cout << "fichier inexistant";
 }
 
-void Csv::getObjects() {
+void CsvReader::getObjects() {
 	vector <string> aFileLines;
 
 	/* on récupère les lignes dans un vecteur de chaine de caractères pour pouvoir
@@ -79,7 +79,7 @@ void Csv::getObjects() {
 
 				const type_info &aT1 = typeid(*aPerson);
 				string aST1(aT1.name());
-				cout << "  (debug) >> Donor or Person : " << aFields.at(0) << " " << aFields.at(1) << " " << aPerson->getExpenses() << " " << aFields.at(3) << " " << aPerson->getType() << endl;
+				//cout << "  (debug) >> Donor or Person : " << aFields.at(0) << " " << aFields.at(1) << " " << aPerson->getExpenses() << " " << aFields.at(3) << " " << aPerson->getType() << endl;
 
 				aGroup.push_back(aPerson);
 
@@ -124,11 +124,11 @@ void Csv::getObjects() {
 
 }
 
-Csv::~Csv() {
+CsvReader::~CsvReader() {
 
 }
 
-float Csv::round(float data) {
+float CsvReader::round(float data) {
 	float nearest = floorf(data * 100 + 0.5) / 100;
 	return nearest;
 }

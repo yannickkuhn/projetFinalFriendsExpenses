@@ -9,7 +9,7 @@
 #include "Person.hpp"
 #include "Group.hpp"
 #include "CountWord.hpp"
-#include "Csv.hpp"
+#include "CsvReader.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -23,7 +23,7 @@
 using namespace std;
 
 int main(int argc, char **argv) {
-	Csv *fileCsv = new Csv("src/fichier.csv");
+	CsvReader *fileCsv = new CsvReader("src/fichier.csv");
 
 	fileCsv->getObjects();
     return 0;

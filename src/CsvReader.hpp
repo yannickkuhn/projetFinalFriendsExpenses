@@ -26,12 +26,12 @@
 
 using namespace std;
 
-class Csv {
+class CsvReader {
 public:
-	Csv(string iFile);
+	CsvReader(string iFile);
 	void getObjects();
 	float round(float data);
-	virtual ~Csv();
+	virtual ~CsvReader();
 private:
 	string _file;
 	ifstream *_df;
