@@ -16,11 +16,11 @@ Group::Group() :
 
 }
 
-Group::Group(string aName) :
+Group::Group(string iName) :
 	_expensePerPerson(0),
 	_totalExpenses(0),
 	_nbPerson(0),
-	_name(aName) {
+	_name(iName) {
 
 }
 
@@ -77,18 +77,18 @@ const int Group::getNbPerson() const {
 
 // Setters of Person
 
-void Group::setExpensePerPerson(const float expensePerPerson) {
-	_expensePerPerson = expensePerPerson;
+void Group::setExpensePerPerson(const float iExpensePerPerson) {
+	_expensePerPerson = iExpensePerPerson;
 }
 
-void Group::setTotalExpenses(const float totalExpenses) {
-	_totalExpenses = totalExpenses;
+void Group::setTotalExpenses(const float iTotalExpenses) {
+	_totalExpenses = iTotalExpenses;
 }
 
-void Group::setName(const string& name) {
-	_name = name;
+void Group::setName(const string& iName) {
+	_name = iName;
 }
 
-void Group::setNbPerson(const int nbPerson) {
-	_nbPerson = nbPerson;
+void Group::setNbPerson(const int iNbPerson) {
+	_nbPerson = iNbPerson;
 }

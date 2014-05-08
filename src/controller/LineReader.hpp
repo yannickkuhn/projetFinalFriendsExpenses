@@ -19,8 +19,12 @@ class LineReader {
 public:
 	LineReader();
 	LineReader(string iText);
+
     unsigned int wordCount();
     vector<string> splitWord(char *iDelimiter);
+
+    const string& getText() const;
+    void setText(const string& iText);
 
 private:
     string _text;

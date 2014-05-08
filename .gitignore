@@ -21,3 +21,4 @@
 *.app
 /.project
 /Debug
+/testDebug

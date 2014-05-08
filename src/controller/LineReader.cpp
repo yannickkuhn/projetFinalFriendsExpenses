@@ -12,6 +12,18 @@ LineReader::LineReader(string iText) {
 	_text = iText;
 }
 
+// setters and getters
+
+void LineReader::setText(const string& iText) {
+	_text = iText;
+}
+
+const string& LineReader::getText() const {
+	return _text;
+}
+
+// methods
+
 unsigned int LineReader::wordCount() {
     unsigned int aCount = 0;
     char *aWord = 0;

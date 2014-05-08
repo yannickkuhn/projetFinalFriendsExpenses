@@ -7,6 +7,10 @@
 
 #include "CsvReader.hpp"
 
+CsvReader::CsvReader() {
+
+}
+
 CsvReader::CsvReader(string iFile) {
 	_file = iFile;
 	cout << "recuperer le fichier : " << _file << endl;
@@ -15,6 +19,17 @@ CsvReader::CsvReader(string iFile) {
 		cout << "fichier inexistant";
 	cout << "lecture du fichier ok" << endl;
 }
+
+// setters and getters
+
+void CsvReader::setFile(const string& iFile) {
+	_file = iFile;
+}
+
+const string& CsvReader::getFile() const {
+	return _file;
+}
+
 
 int CsvReader::testGroupInMemory(string iName) {
 	for(size_t i=0; i < _groups.size(); i++) {

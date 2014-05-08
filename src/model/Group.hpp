@@ -19,7 +19,7 @@ class Group : public vector<Person *> {
 
 public:
     Group();
-    Group(string aName);
+    Group(string iName);
     virtual ~Group();
 
     void totalExpenses();
@@ -35,10 +35,10 @@ public:
     const int getNbPerson() const;
 
 // setters of Group
-    void setExpensePerPerson(const float expensePerPerson);
-    void setTotalExpenses(const float totalExpenses);
-    void setName(const string& name);
-    void setNbPerson(const int nbPerson);
+    void setExpensePerPerson(const float iExpensePerPerson);
+    void setTotalExpenses(const float iTotalExpenses);
+    void setName(const string& iName);
+    void setNbPerson(const int iNbPerson);
 
 private:
 	float _expensePerPerson;

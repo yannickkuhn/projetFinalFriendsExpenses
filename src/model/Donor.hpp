@@ -14,8 +14,11 @@ class Donor : public Person {
 public:
 	Donor();
 	Donor(const Group *iGroup);
+	Donor(const string iName, const string& iPhoneNumber, const float iExpenses);
+	Donor(const string iName, const string& iPhoneNumber, const float iExpenses, const Group *iGroup);
+
 	void operatePayback(const float iExpensesPerPerson, const int iIfPresenceDonor);
-	void setExpenses(const float expenses);
+	void setExpenses(const float iExpenses);
 	virtual ~Donor();
 };
 

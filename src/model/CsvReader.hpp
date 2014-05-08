@@ -33,6 +33,7 @@ using namespace std;
 
 class CsvReader {
 public:
+	CsvReader();
 	CsvReader(string iFile);
 	void getObjects();
 	int testLineContent(string iLineContent);
@@ -40,6 +41,10 @@ public:
 	void printColorValues(string iText, float iValue);
 	float round(float iData);
 	virtual ~CsvReader();
+
+	const string& getFile() const;
+	void setFile(const string& iFile);
+
 private:
 	string _file;
 	ifstream *_df;
