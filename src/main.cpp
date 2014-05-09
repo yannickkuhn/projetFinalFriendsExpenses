@@ -25,9 +25,9 @@ using namespace std;
 
 int main(int argc, char **argv) {
 
-	Parser *parse;
-	parse = new Parser(argc, argv);
-	parse->parse();
+	Parser *aParse;
+	aParse = new Parser(argc, argv);
+	aParse->parse();
 
     return 0;
 }

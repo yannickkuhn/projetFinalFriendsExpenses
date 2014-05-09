@@ -10,7 +10,6 @@
 
 #include <vector>
 #include <string>
-#include <typeinfo>
 #include <iostream>
 #include "Person.hpp"
 

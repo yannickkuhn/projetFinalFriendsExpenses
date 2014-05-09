@@ -32,9 +32,9 @@ public:
 	void setArgc(int argc);
 	void setArgv(char **argv);
 
-	void parse();
+	int parse(string iChaine = "");
 	void displayLongHelp();
-	void readCsvFile();
+	int readCsvFile(string iChaine = "");
 
 private:
 	int _argc;

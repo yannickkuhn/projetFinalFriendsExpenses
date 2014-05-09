@@ -21,6 +21,19 @@ Person::Person(const Group *iGroup) :
 	_group(iGroup) {
 }
 
+Person::Person(const string iName, const string& iPhoneNumber, const float iExpenses) {
+	_name = iName;
+	_phoneNumber = iPhoneNumber;
+	_expenses = iExpenses;
+}
+
+Person::Person(const string iName, const string& iPhoneNumber, const float iExpenses, const Group *iGroup) {
+	_name = iName;
+	_phoneNumber = iPhoneNumber;
+	_expenses = iExpenses;
+	_group = iGroup;
+}
+
 Person::~Person() {
 
 }
@@ -40,9 +53,6 @@ const string& Person::getName() const {
 const string& Person::getPhoneNumber() const {
 	return _phoneNumber;
 }
-const string& Person::getType() const {
-	return _type;
-}
 const float Person::getExpenses() const {
 	return _expenses;
 }
@@ -52,21 +62,21 @@ const float Person::getPayback() const {
 const Group* Person::getGroup() const {
 	return _group;
 }
+const string Person::getType() const {
+	return "Person";
+}
 
 // setters of Person
 
-void Person::setName(const string& name) {
-	_name = name;
+void Person::setName(const string& iName) {
+	_name = iName;
 }
-void Person::setPhoneNumber(const string& phoneNumber) {
-	_phoneNumber = phoneNumber;
+void Person::setPhoneNumber(const string& iPhoneNumber) {
+	_phoneNumber = iPhoneNumber;
 }
-void Person::setType(const string& type) {
-	_type = type;
+void Person::setExpenses(const float iExpenses) {
+	_expenses = iExpenses;
 }
-void Person::setExpenses(const float expenses) {
-	_expenses = expenses;
-}
-void Person::setPayback(const float payback) {
-	_payback = payback;
+void Person::setPayback(const float iPayback) {
+	_payback = iPayback;
 }

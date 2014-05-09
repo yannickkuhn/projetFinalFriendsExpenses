@@ -117,7 +117,6 @@ void CsvReader::getObjects() {
 			aPerson->setName(aFields.at(0));
 			aPerson->setPhoneNumber(aFields.at(1));
 			aPerson->setExpenses((float)atof(aFields.at(2).c_str()));
-			aPerson->setType(aFields.at(4));
 
 			const type_info &aT1 = typeid(*aPerson);
 			string aST1(aT1.name());

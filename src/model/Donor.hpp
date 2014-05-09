@@ -19,6 +19,7 @@ public:
 
 	void operatePayback(const float iExpensesPerPerson, const int iIfPresenceDonor);
 	void setExpenses(const float iExpenses);
+	const string getType() const;
 	virtual ~Donor();
 };
 

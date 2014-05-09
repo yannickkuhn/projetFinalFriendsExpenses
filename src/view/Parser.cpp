@@ -32,20 +32,26 @@ void Parser::setArgc(int argc) {
 	_argc = argc;
 }
 
-void Parser::parse() {
+int Parser::parse(string iChaine) {
 	// If no custom argument.
 	if (_argc == 1) {
 		displayLongHelp();
 	}
 	else {
 		// Contains either "help" or "file".
-		if (strcmp(_argv[1], "--help") == 0)
+		if (strcmp(_argv[1], "--help") == 0) {
 			displayLongHelp();
-		else if (strcmp(_argv[1], "--file") == 0)
-			readCsvFile();
-		else
+			return 0;
+		}
+		else if (strcmp(_argv[1], "--file") == 0) {
+			return readCsvFile(iChaine);
+		}
+		else {
 			displayLongHelp();
+			return 0;
+		}
 	}
+	return 0;
 }
 
 void Parser::displayLongHelp() {
@@ -54,7 +60,7 @@ void Parser::displayLongHelp() {
 	"--file filename read the file to render the results.\n";
 }
 
-void Parser::readCsvFile() {
+int Parser::readCsvFile(string iChaine) {
 	if(_argc == 3 && _argv[2] != (char *)"") {
 		string aFilename(_argv[2]);
 		string::size_type aIdx;
@@ -62,17 +68,25 @@ void Parser::readCsvFile() {
 		if(aIdx != std::string::npos) {
 		    string aExt = aFilename.substr(aIdx+1);
 		    if(aExt == "csv") {
-		    	cout << "Affichage du fichier CSV" << endl;
-		    	CsvReader *fileCsv = new CsvReader(_argv[2]);
-		    	fileCsv->getObjects();
+		    	if(iChaine != "test") {
+					cout << "Affichage du fichier CSV" << endl;
+					CsvReader *fileCsv = new CsvReader(_argv[2]);
+					fileCsv->getObjects();
+		    	}
+		    	return 1;
 		    }
-		    else
+		    else {
 		    	cout << "Error: this file is not in extension .csv" << endl;
+		    	return -1;
+		    }
 		}
-		else
+		else {
 			cout << "Error: this file is not in extension .csv" << endl;
+			return -1;
+		}
 	}
 	else {
 		cout << "Error: no file mentioned" << endl;
+		return -2;
 	}
 }
