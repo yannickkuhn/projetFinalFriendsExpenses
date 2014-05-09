@@ -46,6 +46,29 @@ TEST(parser, testArguments) {
 	argc = 3;
 	aParse = new Parser(argc, argv5);
 	EXPECT_EQ(1,aParse->parse("test"));
+
+	// test 6
+	char *argv6[] = {(char *)"program",(char *)"--file",(char *)"fichier.csv",(char *)"--name",(char *)"toto"};
+	argc = 5;
+	aParse = new Parser(argc, argv6);
+	EXPECT_EQ(-3,aParse->parse("test"));
+
+	// test 7
+	char *argv7[] = {(char *)"program",(char *)"--file",(char *)"fichier.csv",(char *)"--name",(char *)"--phone",(char *)"--expense",(char *)"--group"};
+	argc = 7;
+	aParse = new Parser(argc, argv7);
+	EXPECT_EQ(-4,aParse->parse("test"));
+
+	// test 8
+	char *argv8[] = {(char *)"program",
+					 (char *)"--file",(char *)"fichier.csv",
+					 (char *)"--name",(char *)"yaya",
+					 (char *)"--phone",(char *)"6050",
+					 (char *)"--expense",(char *)"60",
+					 (char *)"--group",(char *)"toto"};
+	argc = 11;
+	aParse = new Parser(argc, argv8);
+	EXPECT_EQ(1,aParse->parse("test"));
 }
 
 

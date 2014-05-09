@@ -32,6 +32,45 @@ void Parser::setArgc(int argc) {
 	_argc = argc;
 }
 
+int Parser::testArgsWritter() {
+	int aCptArgs = 0;
+	int aErrorCode = 1;
+	for(int i=0; i < _argc; i++) {
+		//cout << "on parcours ... " << _argv[i] << endl;
+		if(strcmp(_argv[i],(char *)"--name") == 0 || strcmp(_argv[i],(char *)"--phone") == 0 || strcmp(_argv[i],(char *)"--expense") == 0 || strcmp(_argv[i],(char *)"--group") == 0)
+			aCptArgs++;
+	}
+	if(aCptArgs == 4) {
+		// on teste les arguments qui suivent
+		for(int i=0; i < _argc; i++) {
+			if(strcmp(_argv[i],(char *)"--name") == 0 || strcmp(_argv[i],(char *)"--group") == 0 || strcmp(_argv[i],(char *)"--phone") == 0 || strcmp(_argv[i],(char *)"--expense") == 0) {
+				// il ne faut ni que les deux premiers caractères qui suivent soient "--"
+				if(i >= _argc || (_argv[i+1][0] + _argv[i+1][1] == 90) || string(_argv[i+1]).length() < 1) {
+					cout << "Error: " << _argv[i] << " must be completed " << endl;
+					aErrorCode = -4;
+				}
+			}
+			if(strcmp(_argv[i],(char *)"--phone") == 0 && atoi(_argv[i+1]) <= 0) {
+				cout << "Error: " << _argv[i] << " must be a integer (actual : " << atoi(_argv[i+1]) << ")"<< endl;
+				aErrorCode = -5;
+			}
+			if(strcmp(_argv[i],(char *)"--expense") == 0 && atof(_argv[i+1]) <= 0) {
+				cout << "Error: " << _argv[i] << " must be a integer or a float " << endl;
+				aErrorCode = -5;
+			}
+		}
+		return aErrorCode;
+	}
+	else if(aCptArgs == 0) {
+		cout << "ok, on peut directement lire" << endl;
+		return aCptArgs;
+	}
+	else {
+		cout << "Error: options --name, --phone, --expense and --group must be strictly used together" << endl;
+		return -3;
+	}
+}
+
 int Parser::parse(string iChaine) {
 	// If no custom argument.
 	if (_argc == 1) {
@@ -39,39 +78,57 @@ int Parser::parse(string iChaine) {
 	}
 	else {
 		// Contains either "help" or "file".
-		if (strcmp(_argv[1], "--help") == 0) {
-			displayLongHelp();
-			return 0;
+		for(int i=0; i < _argc; i++) {
+			if (strcmp(_argv[i], "--help") == 0) {
+				displayLongHelp();
+				return 0;
+			}
 		}
-		else if (strcmp(_argv[1], "--file") == 0) {
-			return readCsvFile(iChaine);
+		// si on ne veut pas afficher d'aide ... on cherche l'argument --file et on lit/écrit dans le fichier suivant les autres arguments
+		int aI;
+		for(aI=0; aI < _argc; aI++) {
+			if(strcmp(_argv[aI],(char *)"--file") == 0) {
+				int aReadWrite = testArgsWritter();
+				if((aReadWrite == 0 || aReadWrite == 1)) {
+					return readWriteCsvFile(aReadWrite,aI,iChaine);
+				}
+				else
+					return aReadWrite;
+			}
 		}
-		else {
-			displayLongHelp();
-			return 0;
-		}
+		displayLongHelp();
 	}
 	return 0;
 }
 
 void Parser::displayLongHelp() {
-	cout << "Usage: " << "friends-expenses [--help] [--file filename]\n"
+	cout << "Usage: " << "friends-expenses [--help] [--file filename] [--file filename --name yaya --phone 60 --expense 50 --group titi]\n"
 	"--help display the usage.\n"
-	"--file filename read the file to render the results.\n";
+	"--file filename read the file to render the results.\n"
+	"--file filename --name yaya --phone 60 --expense 50 --group titi write line in the file.\n";
 }
 
-int Parser::readCsvFile(string iChaine) {
-	if(_argc == 3 && _argv[2] != (char *)"") {
-		string aFilename(_argv[2]);
+int Parser::readWriteCsvFile(int iReadOrWrite, int iNumArgFile, string iChaine) {
+	if(iNumArgFile >= _argc-1) {
+		cout << "Error: no file mentioned" << endl;
+		return -2;
+	}
+	if(iNumArgFile > 0 && _argv[iNumArgFile+1] != (char *)"") {
+		string aFilename(_argv[iNumArgFile+1]);
 		string::size_type aIdx;
 		aIdx = aFilename.rfind(".");
 		if(aIdx != std::string::npos) {
 		    string aExt = aFilename.substr(aIdx+1);
 		    if(aExt == "csv") {
 		    	if(iChaine != "test") {
-					cout << "Affichage du fichier CSV" << endl;
-					CsvReader *fileCsv = new CsvReader(_argv[2]);
-					fileCsv->getObjects();
+		    		if(iReadOrWrite == 0) {
+						cout << "Affichage du fichier CSV" << endl;
+						CsvReader *fileCsv = new CsvReader(_argv[iNumArgFile+1]);
+						fileCsv->getObjects();
+		    		}
+		    		else if(iReadOrWrite == 1) {
+		    			cout << "ecriture dans le fichier CSV" << endl;
+		    		}
 		    	}
 		    	return 1;
 		    }

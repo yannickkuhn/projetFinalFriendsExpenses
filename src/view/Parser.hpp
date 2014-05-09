@@ -34,7 +34,9 @@ public:
 
 	int parse(string iChaine = "");
 	void displayLongHelp();
-	int readCsvFile(string iChaine = "");
+	int readWriteCsvFile(int iReadOrWrite, int iNumArgFile, string iChaine = "");
+
+	int testArgsWritter();
 
 private:
 	int _argc;
