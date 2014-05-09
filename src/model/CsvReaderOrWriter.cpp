@@ -14,7 +14,7 @@ CsvReaderOrWriter::CsvReaderOrWriter() {
 CsvReaderOrWriter::CsvReaderOrWriter(int iReadOrWrite, char *iFile) {
 	_file = iFile;
 	_readOrWrite = iReadOrWrite;
-	cout << "CsvReaderOrWriter recuperer le fichier : " << _file << endl;
+	//cout << "CsvReaderOrWriter recuperer le fichier : " << _file << endl;
 }
 
 // setters and getters
@@ -36,6 +36,15 @@ const int CsvReaderOrWriter::getReadOrWrite() const {
 int CsvReaderOrWriter::testGroupInMemory(string iName) {
 	for(size_t i=0; i < _groups.size(); i++) {
 		if(_groups.at(i)->getName() == iName) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+int CsvReaderOrWriter::testPersonInMemory(Group *iGroup, string iNamePerson) {
+	for(size_t i=0; i < iGroup->size(); i++) {
+		if(iGroup->at(i)->getName() == iNamePerson) {
 			return i;
 		}
 	}
@@ -101,11 +110,11 @@ int CsvReaderOrWriter::getObjects() {
 			aFields = aCWord.splitWord((char *)";");
 
 			string aCWordGroupName = aFields.at(3);
-			Group *aNewGroup;
-
-			int aActualGroup = testGroupInMemory(aCWordGroupName);
 
 			// vérifier si le groupe n'est pas déjà en mémoire
+			int aActualGroup = testGroupInMemory(aCWordGroupName);
+			Group *aNewGroup;
+
 			if(aActualGroup == -1) {
 				aNewGroup = new Group(aCWordGroupName);
 				_groups.push_back(aNewGroup);
@@ -116,27 +125,76 @@ int CsvReaderOrWriter::getObjects() {
 			}
 
 			// on a récupérer le groupe qu'il nous faut, maintenant travaillons sur les personnes
+			// vérifier si la personne n'est pas déjà en mémoire
+			int aActualPerson = testPersonInMemory(aNewGroup, aFields.at(0));
 			Person *aPerson;
 
-			if(aFields.at(4) == "Person") {
-			aPerson = new Person(aNewGroup);
-			}
-			else if(aFields.at(4) == "Donor") {
-			aPerson = new Donor(aNewGroup);
+			if(aActualPerson == -1) {
+
+				//cout << "on créer la personne ..." << endl;
+
+				if(aFields.at(4) == "Person")
+					aPerson = new Person(aNewGroup);
+				else if(aFields.at(4) == "Donor")
+					aPerson = new Donor(aNewGroup);
+				else {
+					cerr << "error - read CSV file - problem with type of Person" << endl;
+					return -10;
+				}
+
+				aPerson->setName(aFields.at(0));
+				aPerson->setPhoneNumber(aFields.at(1));
+				aPerson->setExpenses((float)atof(aFields.at(2).c_str()));
+
+				aNewGroup->push_back(aPerson);
 			}
 			else {
-			cerr << "error - read CSV file - problem with type of Person" << endl;
-			}
+				aPerson = aNewGroup->at(aActualPerson);
 
-			aPerson->setName(aFields.at(0));
-			aPerson->setPhoneNumber(aFields.at(1));
-			aPerson->setExpenses((float)atof(aFields.at(2).c_str()));
+				//cout << "on récupère la personne déjà créer ..." << aPerson->getType() << endl;
+				if(aPerson->getType() == "Person") {
+					if(aFields.at(4) == "Donor") {
+						int aTotal = aPerson->getExpenses()-(float)atof(aFields.at(2).c_str());
+						//cout << "cas Person Doneur ..." << aTotal << endl;
+						if(aTotal > 0) {	// si une personne, est doneuse, et que la somme est positive, c'est une personne
+							cout << "Person " << aPerson->getName() << " -> Doneur == " << aTotal;
+							aPerson->setExpenses(aTotal);
+						}
+						else {
+							// sinon c'est un doneur (il faut le transformer)
+							aPerson = new Donor(aPerson->getName(),aPerson->getPhoneNumber(),-aTotal,aPerson->getGroup());
+							//cout << "Transformation en doneur ..." << -aTotal << endl;
+							aNewGroup->at(aActualPerson) = aPerson;
+						}
+					}
+					if(aFields.at(4) == "Person") {
+						int aTotal = aPerson->getExpenses()+(float)atof(aFields.at(2).c_str());
+						aPerson->setExpenses(aTotal);
+					}
+				}
+				else if(aPerson->getType() == "Donor") {
+					if(aFields.at(4) == "Donor") {
+						int aTotal = aPerson->getExpenses()-(float)atof(aFields.at(2).c_str());
+						//cout << "cas du doneur doneur" << aTotal << endl;
+						aPerson->setExpenses(-aTotal);
+					}
+					if(aFields.at(4) == "Person") {
+						int aTotal = aPerson->getExpenses()+(float)atof(aFields.at(2).c_str());
+						if(aTotal > 0) {	// si une personne, est doneuse, et que la somme est positive, c'est une personne
+							// c'est une personne (il faut la transformer)
+							aPerson = new Person(aPerson->getName(),aPerson->getPhoneNumber(),aTotal,aPerson->getGroup());
+							aNewGroup->at(aActualPerson) = aPerson;
+						}
+						else {
+							aPerson->setExpenses(-aTotal);
+						}
+					}
+				}
+			}
 
 			const type_info &aT1 = typeid(*aPerson);
 			string aST1(aT1.name());
 			//cout << " (debug) >> Donor or Person : " << aST1 << aFields.at(0) << " " << aFields.at(1) << " " << aPerson->getExpenses() << " " << aFields.at(3) << " " << aPerson->getType() << " "<< aPerson->getGroup()->getName() << endl;
-
-			aNewGroup->push_back(aPerson);
 
 		}
 		if(aLine == 0) aLine = 1;

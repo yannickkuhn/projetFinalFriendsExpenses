@@ -77,7 +77,7 @@ int Parser::testArgsWriter() {
 		return aErrorCode;
 	}
 	else if(aCptArgs == 0) {
-		cout << "ok, on peut directement lire" << endl;
+		//cout << "ok, on peut directement lire" << endl;
 		return aCptArgs;
 	}
 	else {

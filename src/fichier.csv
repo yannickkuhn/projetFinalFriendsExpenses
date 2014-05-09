@@ -11,8 +11,12 @@ Salim;9456;213;Colomb;Person
 Laura;9012;188;Jasse;Donor
 Stephan;8073;178;Berlioz;Person
 Ange;5046;10;Jasse;Person
-
 tota;6065;300;titi;Person
 toti;6066;100;titi;Donor
 totl;6067;24;Colomb;Donor
 totp;6068;12;Colomb;Person
+totp;6068;24;Colomb;Person
+totp;6068;200;Colomb;Person
+totp;6068;20;titi;Person
+totp;6068;200;titi;Donor
+totp;6068;400;titi;Donor

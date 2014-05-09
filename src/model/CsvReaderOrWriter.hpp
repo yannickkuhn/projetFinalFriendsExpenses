@@ -40,6 +40,7 @@ public:
 	int getObjects();
 	int testLineContent(string iLineContent);
 	int testGroupInMemory(string iName);
+	int testPersonInMemory(Group *iGroup, string iNamePerson);
 	void printColorValues(string iText, float iValue);
 	float round(float iData);
 	int writeLine(string iName, string iPhone, string iExpense, string iGroup, string iType);
