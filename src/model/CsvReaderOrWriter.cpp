@@ -5,33 +5,35 @@
  *      Author: Yannick
  */
 
-#include "CsvReader.hpp"
+#include "CsvReaderOrWriter.hpp"
 
-CsvReader::CsvReader() {
+CsvReaderOrWriter::CsvReaderOrWriter() {
 
 }
 
-CsvReader::CsvReader(string iFile) {
+CsvReaderOrWriter::CsvReaderOrWriter(int iReadOrWrite, char *iFile) {
 	_file = iFile;
-	cout << "recuperer le fichier : " << _file << endl;
-	_df = new ifstream(_file.data(), ios::in);
-	if ( !_df )
-		cout << "fichier inexistant";
-	cout << "lecture du fichier ok" << endl;
+	_readOrWrite = iReadOrWrite;
+	cout << "CsvReaderOrWriter recuperer le fichier : " << _file << endl;
 }
 
 // setters and getters
 
-void CsvReader::setFile(const string& iFile) {
+void CsvReaderOrWriter::setFile(char *iFile) {
 	_file = iFile;
 }
-
-const string& CsvReader::getFile() const {
-	return _file;
+void CsvReaderOrWriter::setReadOrWrite(const int iReadOrWrite) {
+	_readOrWrite = iReadOrWrite;
 }
 
+const char * CsvReaderOrWriter::getFile() const {
+	return _file;
+}
+const int CsvReaderOrWriter::getReadOrWrite() const {
+	return _readOrWrite;
+}
 
-int CsvReader::testGroupInMemory(string iName) {
+int CsvReaderOrWriter::testGroupInMemory(string iName) {
 	for(size_t i=0; i < _groups.size(); i++) {
 		if(_groups.at(i)->getName() == iName) {
 			return i;
@@ -40,7 +42,7 @@ int CsvReader::testGroupInMemory(string iName) {
 	return -1;
 }
 
-int CsvReader::testLineContent(string iLineContent) {
+int CsvReaderOrWriter::testLineContent(string iLineContent) {
 
 	vector<string> aFields;
 	LineReader aCWord(iLineContent);
@@ -66,7 +68,19 @@ int CsvReader::testLineContent(string iLineContent) {
 	return 0;
 }
 
-void CsvReader::getObjects() {
+int CsvReaderOrWriter::getObjects() {
+	ifstream *_df;
+	if(_readOrWrite == 1) {
+		cerr << "Problème, fichier ouvert en écriture (_readOrWrite = 1) ..." << endl;
+		return -1;
+	}
+	_df = new ifstream(_file, ios::in);
+	if ( !_df ) {
+		cout << "fichier inexistant";
+		return -1;
+	}
+	cout << "lecture du fichier ok" << endl;
+
 	vector <string> aFileLines;
 	int aLine=0;	/* compteur qui permet de récupérer les données à partir de la ligne 2 */
 
@@ -164,21 +178,34 @@ void CsvReader::getObjects() {
 
 	}
 
+	_df->close();
+	return 1;
+
 }
 
-CsvReader::~CsvReader() {
+CsvReaderOrWriter::~CsvReaderOrWriter() {
 
 }
 
-float CsvReader::round(float iData) {
+float CsvReaderOrWriter::round(float iData) {
 	float nearest = floor(iData * 100 + 0.5) / 100;
 	return nearest;
 }
 
-void CsvReader::printColorValues(string iText, float iValue) {
+void CsvReaderOrWriter::printColorValues(string iText, float iValue) {
 	cout << iText;
 	if(iValue <= 0)
 		cout << color(30) << iValue << color(37);
 	else
 		cout << color(31) << iValue << color(37);
+}
+
+int CsvReaderOrWriter::writeLine(string iName, string iPhone, string iExpense, string iGroup, string iType) {
+	if(iType == "")
+		iType = "Person";
+	ofstream ofs;
+	ofs.open ((char *)_file, std::ofstream::out | std::ofstream::app);
+	ofs << iName << ";" << iPhone << ";" << iExpense << ";" << iGroup << ";" << iType << endl;
+	ofs.close();
+	return 1;
 }

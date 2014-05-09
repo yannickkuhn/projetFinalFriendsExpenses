@@ -10,7 +10,6 @@
 
 Parser::Parser(int argc, char **argv) :
 	_argc(argc), _argv(argv) {
-
 }
 
 Parser::~Parser() {
@@ -24,15 +23,15 @@ char **Parser::getArgv() {
 	return _argv;
 }
 
-void Parser::setArgv(char **argv) {
-	_argv = argv;
+void Parser::setArgv(char **iArgv) {
+	_argv = iArgv;
 }
 
-void Parser::setArgc(int argc) {
-	_argc = argc;
+void Parser::setArgc(int iArgc) {
+	_argc = iArgc;
 }
 
-int Parser::testArgsWritter() {
+int Parser::testArgsWriter() {
 	int aCptArgs = 0;
 	int aErrorCode = 1;
 	for(int i=0; i < _argc; i++) {
@@ -43,7 +42,7 @@ int Parser::testArgsWritter() {
 	if(aCptArgs == 4) {
 		// on teste les arguments qui suivent
 		for(int i=0; i < _argc; i++) {
-			if(strcmp(_argv[i],(char *)"--name") == 0 || strcmp(_argv[i],(char *)"--group") == 0 || strcmp(_argv[i],(char *)"--phone") == 0 || strcmp(_argv[i],(char *)"--expense") == 0) {
+			if(strcmp(_argv[i],(char *)"--name") == 0 || strcmp(_argv[i],(char *)"--group") == 0 || strcmp(_argv[i],(char *)"--phone") == 0 || strcmp(_argv[i],(char *)"--expense") == 0 || strcmp(_argv[i],(char *)"--type") == 0) {
 				// il ne faut ni que les deux premiers caractères qui suivent soient "--"
 				if(i >= _argc || (_argv[i+1][0] + _argv[i+1][1] == 90) || string(_argv[i+1]).length() < 1) {
 					cout << "Error: " << _argv[i] << " must be completed " << endl;
@@ -58,6 +57,22 @@ int Parser::testArgsWritter() {
 				cout << "Error: " << _argv[i] << " must be a integer or a float " << endl;
 				aErrorCode = -5;
 			}
+			if(strcmp(_argv[i],(char *)"--type") == 0 && !(strcmp(_argv[i+1],(char *)"Person") == 0 || strcmp(_argv[i+1],(char *)"Donor") == 0)) {
+				cout << "Error: " << _argv[i] << " must be a Person or a Donor"<< endl;
+				aErrorCode = -6;
+			}
+			if(aErrorCode == 1) {
+				if(strcmp(_argv[i],(char *)"--name") == 0)
+					_argName = _argv[i+1];
+				if(strcmp(_argv[i],(char *)"--group") == 0)
+					_argGroup = _argv[i+1];
+				if(strcmp(_argv[i],(char *)"--phone") == 0)
+					_argPhone = _argv[i+1];
+				if(strcmp(_argv[i],(char *)"--expense") == 0)
+					_argExpense = _argv[i+1];
+				if(strcmp(_argv[i],(char *)"--type") == 0)
+					_argType = _argv[i+1];
+			}
 		}
 		return aErrorCode;
 	}
@@ -66,7 +81,7 @@ int Parser::testArgsWritter() {
 		return aCptArgs;
 	}
 	else {
-		cout << "Error: options --name, --phone, --expense and --group must be strictly used together" << endl;
+		cout << "Error: options --name, --phone, --expense, --type and --group must be strictly used together" << endl;
 		return -3;
 	}
 }
@@ -88,7 +103,7 @@ int Parser::parse(string iChaine) {
 		int aI;
 		for(aI=0; aI < _argc; aI++) {
 			if(strcmp(_argv[aI],(char *)"--file") == 0) {
-				int aReadWrite = testArgsWritter();
+				int aReadWrite = testArgsWriter();
 				if((aReadWrite == 0 || aReadWrite == 1)) {
 					return readWriteCsvFile(aReadWrite,aI,iChaine);
 				}
@@ -105,7 +120,7 @@ void Parser::displayLongHelp() {
 	cout << "Usage: " << "friends-expenses [--help] [--file filename] [--file filename --name yaya --phone 60 --expense 50 --group titi]\n"
 	"--help display the usage.\n"
 	"--file filename read the file to render the results.\n"
-	"--file filename --name yaya --phone 60 --expense 50 --group titi write line in the file.\n";
+	"--file filename --name yaya --phone 60 --expense 50 --type Person --group titi write line in the file.\n";
 }
 
 int Parser::readWriteCsvFile(int iReadOrWrite, int iNumArgFile, string iChaine) {
@@ -121,13 +136,14 @@ int Parser::readWriteCsvFile(int iReadOrWrite, int iNumArgFile, string iChaine) 
 		    string aExt = aFilename.substr(aIdx+1);
 		    if(aExt == "csv") {
 		    	if(iChaine != "test") {
+		    		CsvReaderOrWriter *fileCsv = new CsvReaderOrWriter(iReadOrWrite,_argv[iNumArgFile+1]);
 		    		if(iReadOrWrite == 0) {
 						cout << "Affichage du fichier CSV" << endl;
-						CsvReader *fileCsv = new CsvReader(_argv[iNumArgFile+1]);
 						fileCsv->getObjects();
 		    		}
 		    		else if(iReadOrWrite == 1) {
 		    			cout << "ecriture dans le fichier CSV" << endl;
+		    			fileCsv->writeLine(_argName,_argPhone,_argExpense,_argGroup,_argType);
 		    		}
 		    	}
 		    	return 1;

@@ -9,7 +9,7 @@
 #include "model/Person.hpp"
 #include "model/Group.hpp"
 #include "controller/LineReader.hpp"
-#include "model/CsvReader.hpp"
+#include "model/CsvReaderOrWriter.hpp"
 
 #include <iostream>
 #include <fstream>

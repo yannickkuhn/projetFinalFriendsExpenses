@@ -16,7 +16,7 @@ using namespace std;
 #include <list>
 #include <unistd.h>
 #include <stdlib.h>
-#include "../model/CsvReader.hpp"
+#include "../model/CsvReaderOrWriter.hpp"
 
 // pour pouvoir récupérer ce qu'il y a sur la console on passe : int argc, char **argv
 
@@ -29,18 +29,19 @@ public:
 	int getArgc();
 	char **getArgv();
 
-	void setArgc(int argc);
-	void setArgv(char **argv);
+	void setArgc(int iArgc);
+	void setArgv(char **iArgv);
 
 	int parse(string iChaine = "");
 	void displayLongHelp();
 	int readWriteCsvFile(int iReadOrWrite, int iNumArgFile, string iChaine = "");
 
-	int testArgsWritter();
+	int testArgsWriter();
 
 private:
 	int _argc;
 	char **_argv;
+	string _argName, _argGroup, _argType, _argExpense, _argPhone;
 };
 
 #endif /* PARSER_HPP_ */

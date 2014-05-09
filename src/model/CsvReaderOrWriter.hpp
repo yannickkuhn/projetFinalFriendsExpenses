@@ -31,23 +31,28 @@
 
 using namespace std;
 
-class CsvReader {
+class CsvReaderOrWriter {
 public:
-	CsvReader();
-	CsvReader(string iFile);
-	void getObjects();
+	CsvReaderOrWriter();
+	CsvReaderOrWriter(int iReadOrWrite, char *iFile);
+	virtual ~CsvReaderOrWriter();
+
+	int getObjects();
 	int testLineContent(string iLineContent);
 	int testGroupInMemory(string iName);
 	void printColorValues(string iText, float iValue);
 	float round(float iData);
-	virtual ~CsvReader();
+	int writeLine(string iName, string iPhone, string iExpense, string iGroup, string iType);
 
-	const string& getFile() const;
-	void setFile(const string& iFile);
+	const char* getFile() const;
+	const int getReadOrWrite() const;
+
+	void setFile(char *iFile);
+	void setReadOrWrite(const int iReadOrWrite);
 
 private:
-	string _file;
-	ifstream *_df;
+	char *_file;
+	int _readOrWrite;
 	vector<Group *> _groups;
 };
 
