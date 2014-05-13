@@ -21,6 +21,10 @@
 *.app
 /.project
 /Debug
+<<<<<<< HEAD
 /testDebug
 /Debug
 /Debug
+=======
+/.cproject
+>>>>>>> branch 'master' of https://yannickkuhn:itiip12@github.com/yannickkuhn/projetFinalFriendsExpenses.git
