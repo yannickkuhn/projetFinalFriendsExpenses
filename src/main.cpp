@@ -17,7 +17,7 @@
 #include <vector>
 #include <string>
 #include <list>
-#include <unistd.h>
+#include <unistd.h>l
 #include <stdlib.h>
 #include "view/Parser.hpp"
 
@@ -26,17 +26,10 @@ using namespace std;
 
 
 int main(int argc, char **argv) {
-<<<<<<< HEAD
-
 	Parser *aParse;
 	aParse = new Parser(argc, argv);
 	aParse->parse();
 
     return 0;
-=======
-	Csv *fileCsv = new Csv("src/fichier.csv");
-	fileCsv->getObjects();
 
-    return 1;
->>>>>>> branch 'master' of https://yannickkuhn:itiip12@github.com/yannickkuhn/projetFinalFriendsExpenses.git
 }
