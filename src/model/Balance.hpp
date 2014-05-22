@@ -1,7 +1,7 @@
 /*
  * Balance.hpp
  *
- *  Created on: 16 mai 2014
+ *  Created on: 22 mai 2014
  *      Author: Yannick
  */
 
@@ -10,21 +10,21 @@
 
 #include "Person.hpp"
 
-class Balance {
+using namespace std;
 
+class Balance {
 public:
+	Balance();
 	Balance(Person iPersonPut, Person iPersonGet, float iValue);
-	virtual ~Balance();
 
 	const Person getPersonPut() const;
 	const Person getPersonGet() const;
 	const float getValue() const;
 
+	virtual ~Balance();
 private:
-	Balance();
-	Person _personPut;
-	Person _personGet;
 	float _value;
+	Person _personPut, _personGet;
 };
 
 #endif /* BALANCE_HPP_ */

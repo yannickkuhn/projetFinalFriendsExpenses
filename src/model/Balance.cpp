@@ -1,11 +1,14 @@
 /*
  * Balance.cpp
  *
- *  Created on: 16 mai 2014
+ *  Created on: 22 mai 2014
  *      Author: Yannick
  */
 
 #include "Balance.hpp"
+
+Balance::Balance() {
+}
 
 Balance::Balance(Person iPersonPut, Person iPersonGet, float iValue) {
 	_personPut = iPersonPut;
@@ -22,3 +25,7 @@ const Person Balance::getPersonGet() const {
 const float Balance::getValue() const {
 	return _value;
 }
+
+Balance::~Balance() {
+}
+
