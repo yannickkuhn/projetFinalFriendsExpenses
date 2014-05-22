@@ -59,6 +59,9 @@ const float Person::getExpenses() const {
 const float Person::getPayback() const {
 	return _payback;
 }
+const float Person::getBalance() const {
+	return _balance;
+}
 const Group* Person::getGroup() const {
 	return _group;
 }
@@ -79,4 +82,7 @@ void Person::setExpenses(const float iExpenses) {
 }
 void Person::setPayback(const float iPayback) {
 	_payback = iPayback;
+}
+void Person::setBalance(const float iBalance) {
+	_balance = iBalance;
 }

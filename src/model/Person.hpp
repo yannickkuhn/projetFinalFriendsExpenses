@@ -30,6 +30,7 @@ public:
     const string& getPhoneNumber() const;
     const float getExpenses() const;
     const float getPayback() const;
+    const float getBalance() const;
     const Group* getGroup() const;
     virtual const string getType() const;
 
@@ -38,10 +39,12 @@ public:
     void setPhoneNumber(const string& iPhoneNumber);
     virtual void setExpenses(const float iExpenses);
     void setPayback(const float iPayback);
+    void setBalance(const float iBalance);
 
 protected:
     float _expenses;
     float _payback;
+    float _balance;
     string _name;
     string _phoneNumber;
     const Group *_group;
