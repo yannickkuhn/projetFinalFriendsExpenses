@@ -11,6 +11,7 @@
 #include "../model/Person.hpp"
 #include "../model/Donor.hpp"
 #include "../model/Group.hpp"
+#include "../model/Balance.hpp"
 #include "../controller/LineReader.hpp"
 
 #include <iostream>

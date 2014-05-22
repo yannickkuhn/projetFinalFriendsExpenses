@@ -8,7 +8,7 @@
 #ifndef BALANCE_HPP_
 #define BALANCE_HPP_
 
-#include "Person.hpp"
+class Person;
 
 using namespace std;
 

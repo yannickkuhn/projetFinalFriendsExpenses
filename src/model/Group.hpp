@@ -12,7 +12,7 @@
 #include <string>
 #include <iostream>
 #include "Person.hpp"
-
+#include "Balance.hpp"
 
 class Group : public vector<Person *> {
 
@@ -25,6 +25,7 @@ public:
     void calculExpensesPerPerson();
     void calculNbOfExpensesPerson();
 
+    vector<Balance> doBalance();
     int ifOfNotPresenceDonor();
 
 // getters of Group

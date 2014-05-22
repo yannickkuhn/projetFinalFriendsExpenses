@@ -235,8 +235,16 @@ int CsvReaderOrWriter::getObjects() {
 		}
 
 	}
-
 	_df->close();
+
+	cout << endl << color(34) << "Balances :" << endl;
+	cout << "---------------------------" << color(37) << endl << endl;
+
+	for(size_t i=0; i < _groups.size(); i++) {
+		Group *aTmpGroup = _groups.at(i);
+		aTmpGroup->doBalance();
+	}
+
 	return 1;
 
 }

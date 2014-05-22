@@ -5,6 +5,7 @@
  *      Author: Yannick
  */
 
+#include "Person.hpp"
 #include "Balance.hpp"
 
 Balance::Balance() {
